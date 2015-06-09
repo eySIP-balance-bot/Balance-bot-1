@@ -36,8 +36,6 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include <math.h>
-#include <stdio.h>
-#include <string.h>
 
 #include "lcd.c"
 
@@ -188,14 +186,13 @@ void init_devices()
  //all peripherals are now initialized
 }
 
-void pr_int(int a,int b,uint16_t c,int d) /* get negative values*/
+void pr_int(int a,int b,int c,int d) /* get negative values*/
 {
-	if (c>64000)
+	if (c<0)
 	{
 		lcd_cursor(a,b);
 		lcd_string("-");
-		c = 65536 -c;
-		lcd_print(a,b+1,c,d);
+		lcd_print(a,b+1,abs(c),d);
 	} 
 	else
 	{
@@ -204,6 +201,17 @@ void pr_int(int a,int b,uint16_t c,int d) /* get negative values*/
 		lcd_print(a,b+1,c,d);
 	}
 }
+
+int sign (unsigned int n)
+{
+	if (n>32767)
+	{
+		return (n-65536);
+	}
+	else
+		return n;
+		
+}
 //-------------------------------------------------------------------------------
 // Main Programme start here.
 //-------------------------------------------------------------------------------
@@ -211,7 +219,9 @@ int main(void)
 {   
   uint16_t x_byte = 0,y_byte = 0,z_byte = 0;
   uint8_t x_byte1 = 0x88,x_byte2 = 0x88,y_byte1 = 0,y_byte2 = 0,z_byte1 = 0,z_byte2 = 0;
+  int x_acc,y_acc,z_acc;
   //long x,y,z;
+  float angle;
 
  init_devices();
  lcd_set_4bit();                // set the LCD in 4 bit mode
@@ -249,21 +259,28 @@ while(1)
 	  x_byte=x_byte2;
 	  x_byte = (x_byte << 8);
 	  x_byte |= x_byte1;
+	  x_acc=sign(x_byte);
 	  
-	  pr_int(1,1,x_byte,3); 
+	  //pr_int(1,1,x_byte,3); 
 	  
 	  y_byte=y_byte2;
 	  y_byte = (y_byte << 8);
 	  y_byte |= y_byte1;
+	  y_acc=sign(y_byte);
 	  
-	  pr_int(2,5,y_byte,3); 	
+	  //pr_int(2,5,y_byte,3); 	
 	  
 	  z_byte=z_byte2;
 	  z_byte = (z_byte << 8);
 	  z_byte |= z_byte1;
+	  z_acc=sign(z_byte);
 	  
-	  pr_int(1,10,z_byte,3);  
 	  
+	  //pr_int(1,10,z_byte,3);  
+	  
+	  angle=(atan((y_acc*1.0)/(z_acc*1.0)));
+	  angle *= 180.0/3.14;
+	  pr_int(1,1,angle,3);
 	  
 	  /*if(x_byte2 & (1 << 1))	
 		{	
