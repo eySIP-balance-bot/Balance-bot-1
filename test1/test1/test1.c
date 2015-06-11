@@ -38,7 +38,7 @@
 #include <math.h>
 
 #include "lcd.c"
-
+#include "timer.h"
 
 #define	SLA_W	0xA6             // Write address for DS1307 selection for writing	
 #define	SLA_R	0xA7             // Write address for DS1307 selection for reading  
@@ -125,44 +125,44 @@ unsigned char read_byte(unsigned char address)
  
 TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);      // send START condition  
 while(!(TWCR & (1<<TWINT)));                      // wait for TWINT Flag set
- _delay_ms(10);
+ //_delay_ms(10);
 
  
 
  TWDR = SLA_W;									   // load SLA_W into TWDR Register
  TWCR  = (1<<TWINT) | (1<<TWEN);                   // clear TWINT flag to start tramnsmission of slave address 
  while(!(TWCR & (1<<TWINT)));                      // wait for TWINT Flag set
- _delay_ms(10); 
+ //_delay_ms(10); 
 
  TWDR = address;                                   // send address of register byte want to access register
  TWCR  = (1<<TWINT) | (1<<TWEN);                   // clear TWINT flag to start tramnsmission of slave address 
  while(!(TWCR & (1<<TWINT)));                      // wait for TWINT Flag set
- _delay_ms(10);
+ //_delay_ms(10);
  
 
 
  TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);       // send RESTART condition
  while(!(TWCR & (1<<TWINT)));                      // wait for TWINT Flag set
- _delay_ms(10);
+ //_delay_ms(10);
 
 
  
  TWDR = SLA_R;									   // load SLA_R into TWDR Register
  TWCR  = (1<<TWINT) | (0<<TWSTA) | (1<<TWEN);      // clear TWINT flag to start tramnsmission of slave address 
  while(!(TWCR & (1<<TWINT)));                      // wait for TWINT Flag set
- _delay_ms(10);
+ //_delay_ms(10);
  
  
 
  TWCR  = (1<<TWINT) | (1<<TWEN);                   // clear TWINT flag to read the addressed register
  while(!(TWCR & (1<<TWINT)));                      // wait for TWINT Flag set
  rtc_recv_data = TWDR;
- _delay_ms(10);
+ //_delay_ms(10);
  
  TWDR = 00;                                        // laod the NO-ACK value to TWDR register 
  TWCR  = (1<<TWINT) | (1<<TWEN);                   // clear TWINT flag to start tramnsmission of NO_ACK signal
  while(!(TWCR & (1<<TWINT)));                      // wait for TWINT Flag set
- _delay_ms(10);
+ //_delay_ms(10);
   
  return(rtc_recv_data);                            // return the read value to called function
 }
@@ -234,10 +234,11 @@ int main(void)
 while(1)
 {
 	   
-	  
+	   start_timer4();
 	   x_byte1 = read_byte(X1);
 	   //x_byte1=(x_byte1*1000)/256;
-	   //lcd_print(1,1,x_byte1,3);
+	   
+	   
 	   
 	   x_byte2 = read_byte(X2);
 	   //lcd_print(2,1,abs(x_byte2),3);
@@ -280,8 +281,11 @@ while(1)
 	  
 	  angle=(atan((y_acc*1.0)/(z_acc*1.0)));
 	  angle *= 180.0/3.14;
+	  lcd_print(2,1,millis(),4);
+	  start_timer4();
 	  pr_int(1,1,angle,3);
 	  
+	  lcd_print(2,6,millis(),4);
 	  /*if(x_byte2 & (1 << 1))	
 		{	
 			lcd_cursor(1, 1);
