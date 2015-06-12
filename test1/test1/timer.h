@@ -48,7 +48,7 @@ int millis(void)
 {
 	int time=0;	
 	time=1000*(tot_overflow + (TCNT4-7936.0)/57598);
-	TCCR4B=0x00;
+	start_timer4();
 	return time;
 	
 }
