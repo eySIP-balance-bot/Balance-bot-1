@@ -15,17 +15,17 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING
   5 .debug_info   00000eff  00000000  00000000  00001062  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_abbrev 0000030d  00000000  00000000  00001f61  2**0
+  6 .debug_abbrev 000002fe  00000000  00000000  00001f61  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_line   00000991  00000000  00000000  0000226e  2**0
+  7 .debug_line   00000991  00000000  00000000  0000225f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_frame  00000298  00000000  00000000  00002c00  2**2
+  8 .debug_frame  00000298  00000000  00000000  00002bf0  2**2
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_str    000003c8  00000000  00000000  00002e98  2**0
+  9 .debug_str    000003d6  00000000  00000000  00002e88  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_loc    00000a9c  00000000  00000000  00003260  2**0
+ 10 .debug_loc    00000a9c  00000000  00000000  0000325e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 000000d0  00000000  00000000  00003cfc  2**0
+ 11 .debug_ranges 000000d0  00000000  00000000  00003cfa  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1199,7 +1199,7 @@ void SetTunings(double Kp, double Ki, double Kd)
 
 int main(void)
 {
-	int acc;
+	int acc_Angle;
 	init_adxl();
  97a:	e8 de       	rcall	.-560    	; 0x74c <init_adxl>
 	
@@ -1227,7 +1227,7 @@ void SetTunings(double Kp, double Ki, double Kd)
  9ac:	a0 93 1a 02 	sts	0x021A, r26
  9b0:	b0 93 1b 02 	sts	0x021B, r27
 {
-	int acc;
+	int acc_Angle;
 	init_adxl();
 	
 	SetTunings(1,1,1);
@@ -1235,10 +1235,10 @@ void SetTunings(double Kp, double Ki, double Kd)
  9b4:	07 dc       	rcall	.-2034   	; 0x1c4 <start_timer4>
 	while(1)
 	{
-		acc=acc_angle();
+		acc_Angle=acc_angle();
  9b6:	d2 de       	rcall	.-604    	; 0x75c <acc_angle>
  9b8:	ec 01       	movw	r28, r24
-		Input=(double)acc;
+		Input=(double)acc_Angle;
  9ba:	bc 01       	movw	r22, r24
  9bc:	88 27       	eor	r24, r24
  9be:	77 fd       	sbrc	r23, 7
@@ -1251,7 +1251,7 @@ void SetTunings(double Kp, double Ki, double Kd)
  9d2:	90 93 32 02 	sts	0x0232, r25
 		Compute();
  9d6:	02 df       	rcall	.-508    	; 0x7dc <Compute>
-		pr_int(2,1,acc,3);
+		pr_int(2,1,acc_Angle,3);
  9d8:	23 e0       	ldi	r18, 0x03	; 3
  9da:	30 e0       	ldi	r19, 0x00	; 0
  9dc:	ae 01       	movw	r20, r28
