@@ -109,8 +109,8 @@ void init_ports()
 void timer5_init()
 {
 	TCCR5B = 0x00;	//Stop
-	TCNT5H = 0xFF;	//Counter higher 8-bit value to which OCR5xH value is compared with
-	TCNT5L = 0x03;	//Counter lower 8-bit value to which OCR5xH value is compared with
+	TCNT5H = 0xFC;	//Counter higher 8-bit value to which OCR5xH value is compared with
+	TCNT5L = 0x01;	//Counter lower 8-bit value to which OCR5xH value is compared with
 	OCR5AH = 0x03;	//Output compare register high value for Left Motor
 	OCR5AL = 0xFF;	//Output compare register low value for Left Motor
 	OCR5BH = 0x03;	//Output compare register high value for Right Motor
