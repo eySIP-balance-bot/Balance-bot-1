@@ -26,8 +26,8 @@ void Compute()
 	double timeChange = (double)millis();
 	
 	/*Compute all the working error variables*/
-	double error = Setpoint - Input;
-	errSum = (error * timeChange)+(lastErr*lastTime)+(lastErr2*lastTime2);
+	double error = Input - Setpoint;
+	errSum += (error * timeChange);//+(lastErr*lastTime)+(lastErr2*lastTime2);
 	double dErr = (error - lastErr) / timeChange;
 	
 	/*Compute PID Output*/
@@ -52,12 +52,17 @@ void SetTunings(double Kp, double Ki, double Kd)
 
 int main(void)
 {
-	pr_int(2,1,acc_angle(),3);
+	int acc;
+	init_adxl();
+	
 	SetTunings(1,1,1);
+	start_timer4();
 	while(1)
 	{
-		Input=(double)acc_angle();
+		acc=acc_angle();
+		Input=(double)acc;
 		Compute();
+		pr_int(2,1,acc,3);
 		pr_int(1,1,Output,5);
 	}	
 }
