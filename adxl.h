@@ -125,62 +125,50 @@ unsigned char read_byte(unsigned char address)
  
 TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);      // send START condition  
 while(!(TWCR & (1<<TWINT)));                      // wait for TWINT Flag set
- _delay_ms(10);
 
  
 
  TWDR = SLA_W;									   // load SLA_W into TWDR Register
  TWCR  = (1<<TWINT) | (1<<TWEN);                   // clear TWINT flag to start tramnsmission of slave address 
  while(!(TWCR & (1<<TWINT)));                      // wait for TWINT Flag set
- _delay_ms(10); 
 
  TWDR = address;                                   // send address of register byte want to access register
  TWCR  = (1<<TWINT) | (1<<TWEN);                   // clear TWINT flag to start tramnsmission of slave address 
  while(!(TWCR & (1<<TWINT)));                      // wait for TWINT Flag set
- _delay_ms(10);
  
 
 
  TWCR = (1<<TWINT) | (1<<TWSTA) | (1<<TWEN);       // send RESTART condition
  while(!(TWCR & (1<<TWINT)));                      // wait for TWINT Flag set
- _delay_ms(10);
 
 
  
  TWDR = SLA_R;									   // load SLA_R into TWDR Register
  TWCR  = (1<<TWINT) | (0<<TWSTA) | (1<<TWEN);      // clear TWINT flag to start tramnsmission of slave address 
  while(!(TWCR & (1<<TWINT)));                      // wait for TWINT Flag set
- _delay_ms(10);
+ 
  
  
 
  TWCR  = (1<<TWINT) | (1<<TWEN);                   // clear TWINT flag to read the addressed register
  while(!(TWCR & (1<<TWINT)));                      // wait for TWINT Flag set
  rtc_recv_data = TWDR;
- _delay_ms(10);
  
  TWDR = 00;                                        // laod the NO-ACK value to TWDR register 
  TWCR  = (1<<TWINT) | (1<<TWEN);                   // clear TWINT flag to start tramnsmission of NO_ACK signal
  while(!(TWCR & (1<<TWINT)));                      // wait for TWINT Flag set
- _delay_ms(10);
   
  return(rtc_recv_data);                            // return the read value to called function
 }
 
-//------------------------------------------------------------------------------
-// initialise the diaplay format  
-//------------------------------------------------------------------------------
-void display_format_init(void)
-{
- lcd_cursor (1, 1);
- lcd_string("  :  :  ");  
-}
 
 // initialise the devices 
 void init_devices()
 {
  cli();              // disable all interrupts 
  lcd_port_config();  // configure the LCD port 
+ lcd_set_4bit();
+ lcd_init();
  twi_init();         // configur the I2cC, i.e TWI module 
  sei();              // re-enable interrupts
  //all peripherals are now initialized
@@ -215,22 +203,23 @@ int sign (unsigned int n)
 //-------------------------------------------------------------------------------
 // Main Programme start here.
 //-------------------------------------------------------------------------------
-int acc_angle(void)
+void init_adxl(void)
 {   
-  uint16_t x_byte = 0,y_byte = 0,z_byte = 0;
-  uint8_t x_byte1 = 0,x_byte2 = 0,y_byte1 = 0,y_byte2 = 0,z_byte1 = 0,z_byte2 = 0;
-  int x_acc,y_acc,z_acc;
-  //long x,y,z;
-  float angle;
-
+ 
  init_devices();
 
 	write_byte(0x0,0x2D);
 	write_byte(0x8,0x2D);
- 
-while(1)
+}
+
+int acc_angle(void)
 {
-	   
+	    uint16_t x_byte = 0,y_byte = 0,z_byte = 0;
+		uint8_t x_byte1 = 0,x_byte2 = 0,y_byte1 = 0,y_byte2 = 0,z_byte1 = 0,z_byte2 = 0;
+		int x_acc,y_acc,z_acc;
+		//long x,y,z;
+		float angle;
+ 
 	  
 	   x_byte1 = read_byte(X1);
 	   //x_byte1=(x_byte1*1000)/256;
@@ -281,7 +270,7 @@ while(1)
 	  
 	return angle;
 }
-}
+
 
 //--------------------------------------------------------------------------------
 
