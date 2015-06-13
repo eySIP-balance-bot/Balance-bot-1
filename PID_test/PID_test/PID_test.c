@@ -168,7 +168,10 @@ int main(void)
 	
 	SetTunings(1,1,1);
 	start_timer4();
-	while(1)
+	//_delay_ms(10);
+	acc_Angle=millis();
+	lcd_print(1,1,acc_Angle,5);
+	while(0)
 	{
 		acc_Angle=acc_angle();
 		Input=(double)acc_Angle;
