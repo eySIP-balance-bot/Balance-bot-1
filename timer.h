@@ -10,7 +10,7 @@ void timer4_init(void)
 	tot_overflow=0;
 	TCCR4B = 0x00; //stop
 	TCNT4H = 0xC6; //Counter higher 8 bit value
-	TCNT4L = 0x66; //Counter lower 8 bit value
+	TCNT4L = 0x67; //Counter lower 8 bit value
 	OCR4AH = 0x00; //Output compare Register (OCR)- Not used
 	OCR4AL = 0x00; //Output compare Register (OCR)- Not used
 	OCR4BH = 0x00; //Output compare Register (OCR)- Not used
@@ -32,7 +32,7 @@ ISR(TIMER4_OVF_vect)
 	tot_overflow++;
 	//TIMER4 has overflowed
 	TCNT4H = 0xC6; //reload counter high value
-	TCNT4L = 0x66; //reload counter low value
+	TCNT4L = 0x67; //reload counter low value
 }
 
 void start_timer4(void)
@@ -47,7 +47,7 @@ void start_timer4(void)
 int millis(void)
 {
 	int time=0;
-	time=1000*(tot_overflow + (TCNT4-50791.4)/14745.6);
+	time=1000*(tot_overflow + (TCNT4-50791)/14745);
 	start_timer4();
 	return time;
 
