@@ -44,10 +44,18 @@ void start_timer4(void)
 
 }
 
-int millis(void)
+int micros(void)
 {
 	int time=0;
 	time=1000*(tot_overflow + (TCNT4-50791)/14745);
+	start_timer4();
+	return time;
+
+}
+int millis(void)
+{
+	int time=0;
+	time=(tot_overflow + (TCNT4-50791)/14745);
 	start_timer4();
 	return time;
 
