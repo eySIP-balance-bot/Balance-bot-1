@@ -46,28 +46,48 @@
 \headcommand {\beamer@subsectionpages {9}{9}}
 \headcommand {\slideentry {9}{0}{10}{10/10}{}{0}}
 \headcommand {\beamer@framepages {10}{10}}
-\headcommand {\sectionentry {10}{Task Accomplished}{11}{Task Accomplished}{0}}
+\headcommand {\sectionentry {10}{GY-80 Module Interfacing}{11}{GY-80 Module Interfacing}{0}}
 \headcommand {\beamer@sectionpages {10}{10}}
 \headcommand {\beamer@subsectionpages {10}{10}}
 \headcommand {\slideentry {10}{0}{11}{11/11}{}{0}}
 \headcommand {\beamer@framepages {11}{11}}
-\headcommand {\sectionentry {11}{CHALLENGES FACED}{12}{CHALLENGES FACED}{0}}
+\headcommand {\sectionentry {11}{Task Accomplished}{12}{Task Accomplished}{0}}
 \headcommand {\beamer@sectionpages {11}{11}}
 \headcommand {\beamer@subsectionpages {11}{11}}
 \headcommand {\slideentry {11}{0}{12}{12/12}{}{0}}
 \headcommand {\beamer@framepages {12}{12}}
-\headcommand {\sectionentry {12}{Future Plans}{13}{Future Plans}{0}}
+\headcommand {\sectionentry {12}{I2C protocol}{13}{I2C protocol}{0}}
 \headcommand {\beamer@sectionpages {12}{12}}
 \headcommand {\beamer@subsectionpages {12}{12}}
 \headcommand {\slideentry {12}{0}{13}{13/13}{}{0}}
 \headcommand {\beamer@framepages {13}{13}}
-\headcommand {\sectionentry {13}{Thank You}{14}{Thank You}{0}}
+\headcommand {\sectionentry {13}{I2C software protocol}{14}{I2C software protocol}{0}}
 \headcommand {\beamer@sectionpages {13}{13}}
 \headcommand {\beamer@subsectionpages {13}{13}}
 \headcommand {\slideentry {13}{0}{14}{14/14}{}{0}}
 \headcommand {\beamer@framepages {14}{14}}
-\headcommand {\beamer@partpages {1}{14}}
-\headcommand {\beamer@subsectionpages {14}{14}}
+\headcommand {\sectionentry {14}{PID algorithm for the bot}{15}{PID algorithm for the bot}{0}}
 \headcommand {\beamer@sectionpages {14}{14}}
-\headcommand {\beamer@documentpages {14}}
-\headcommand {\def \inserttotalframenumber {14}}
+\headcommand {\beamer@subsectionpages {14}{14}}
+\headcommand {\slideentry {14}{0}{15}{15/15}{}{0}}
+\headcommand {\beamer@framepages {15}{15}}
+\headcommand {\sectionentry {15}{Challenges faced}{16}{Challenges faced}{0}}
+\headcommand {\beamer@sectionpages {15}{15}}
+\headcommand {\beamer@subsectionpages {15}{15}}
+\headcommand {\slideentry {15}{0}{16}{16/16}{}{0}}
+\headcommand {\beamer@framepages {16}{16}}
+\headcommand {\sectionentry {16}{Future Plans}{17}{Future Plans}{0}}
+\headcommand {\beamer@sectionpages {16}{16}}
+\headcommand {\beamer@subsectionpages {16}{16}}
+\headcommand {\slideentry {16}{0}{17}{17/17}{}{0}}
+\headcommand {\beamer@framepages {17}{17}}
+\headcommand {\sectionentry {17}{Thank You}{18}{Thank You}{0}}
+\headcommand {\beamer@sectionpages {17}{17}}
+\headcommand {\beamer@subsectionpages {17}{17}}
+\headcommand {\slideentry {17}{0}{18}{18/18}{}{0}}
+\headcommand {\beamer@framepages {18}{18}}
+\headcommand {\beamer@partpages {1}{18}}
+\headcommand {\beamer@subsectionpages {18}{18}}
+\headcommand {\beamer@sectionpages {18}{18}}
+\headcommand {\beamer@documentpages {18}}
+\headcommand {\def \inserttotalframenumber {18}}
